@@ -96,7 +96,16 @@ const person = new Person({
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {}
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+}
+
+Car.prototype.fill = function (gallons) {
+  this.tank += gallons;
+};
 
 /*
   TASK 3
@@ -105,16 +114,31 @@ function Car() {}
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {}
+function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
+}
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}.`;
+};
+
+const baby = new Baby({
+  name: "Lucy",
+  age: 5,
+  eat: "trains",
+});
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. When this will be the value of the window object.
+  2.  when a dot calls a function the object is referring to the object before the dot.
+  3. this refers to the instance of the newly created object and is returned by the constructor function.
+  4. When using .call or .apply you can override constructor objects using object oriented. 
 */
 
 ///////// END OF CHALLENGE /////////
